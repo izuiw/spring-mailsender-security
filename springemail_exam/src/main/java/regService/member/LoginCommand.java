@@ -1,8 +1,13 @@
 package regService.member;
 
+import org.apache.ibatis.type.Alias;
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Alias("LoginCommand")
 public class LoginCommand {
-	
+	@NotEmpty(message="아이디를 입력해주세요.")
 	private String id;
+	@NotEmpty(message="비밀번호를 입력해주세요.")
 	private String pwd;
 	
 

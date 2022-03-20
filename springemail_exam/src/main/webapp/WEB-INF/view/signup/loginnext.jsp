@@ -3,6 +3,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 
-	alert("이메일 인증 완료. ${email}님 화원가입을 축하합니다.");
-	document.location.href="<c:url value='/member/login'/>";
+	alert("${memberVO.id}님 로그인 성공.");
+	document.location.href="<c:url value='/main'/>";
 </script>

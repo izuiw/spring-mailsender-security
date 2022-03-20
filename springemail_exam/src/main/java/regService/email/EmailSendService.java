@@ -62,7 +62,7 @@ public class EmailSendService {
 	public String sendAuthMail(String email) {
 		System.out.println("mailSender : " +mailSender);
 		// 난수
-		String authKey = getKey(6);
+		String auth = getKey(6);
 
 		// 인증메일 보내기
 
@@ -72,8 +72,8 @@ public class EmailSendService {
 			System.out.println(mailSender.getHost());
 			sendMail.setSubject("회원가입 이메일 인증");
 			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>").append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-					.append("<a href='member/signUpConfirm?email=").append(email)
-					.append("&authKey=").append(authKey).append("' target='_blank'>이메일 인증 확인</a>").toString());
+					.append("<a href='http://localhost:8080/springemail_exam/member/signUpConfirm?email=").append(email)
+					.append("&auth=").append(auth).append("' target='_blank'>이메일 인증 확인</a>").toString());
 			sendMail.setFrom("aswll.kr@gmail.com", "관리자");
 			sendMail.setTo(email);
 			sendMail.send();
@@ -84,7 +84,7 @@ public class EmailSendService {
 			e.printStackTrace();
 		}
 
-		return authKey;
+		return auth;
 	}
 
 }

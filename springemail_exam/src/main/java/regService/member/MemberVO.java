@@ -1,13 +1,20 @@
 package regService.member;
 
+import org.apache.ibatis.type.Alias;
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Alias("MemberVO")
 public class MemberVO {
 	
 	private Long num;
+	@NotEmpty(message="아이디를 입력해주세요.")
 	private String id;
+	@NotEmpty(message="비밀번호를 입력해주세요.")
 	private String pwd;
+	@NotEmpty(message="이메일을 입력해주세요.")
 	private String email;
 	private String auth;
-	private int authstatus;
+	private String authstatus;
 	
 	
 	public String getAuth() {
@@ -40,10 +47,10 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getAuthstatus() {
+	public String getAuthstatus() {
 		return authstatus;
 	}
-	public void setAuthstatus(int authstatus) {
+	public void setAuthstatus(String authstatus) {
 		this.authstatus = authstatus;
 	}
 	@Override

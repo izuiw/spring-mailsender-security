@@ -17,12 +17,12 @@
 	</update>
 	
 	<!-- 인증 완료 후, authStatus 업데이트 -->
-	<update id="updateAuthStatus" parameterType="String">
-		update REGSERVICE set AUTHSTATUS = AUTHSTATUS+1 where EMAIL = #{email} 
+	<update id="updateAuthStatus" parameterType="HashMap">
+		update REGSERVICE set AUTHSTATUS = 'Y' where EMAIL = #{email} and AUTH = #{auth}
 	</update>
 	
 	<!-- 가입시, 아이디 중복체크 -->
-	<select id="idCheck" parameterType="Stirng" resultType="String">
+	<select id="idCheck" parameterType="String" resultType="String">
 		select ID from REGSERVICE where ID = #{id} 
 	</select>
 	

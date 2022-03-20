@@ -51,6 +51,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	</bean> 
 	
 	<bean id="regService" class="regService.member.RegService"/>
+	<bean id="loginService" class="regService.member.LoginService"/>
 
 	<bean id="mss" class="regService.email.EmailSendService"/>
 	

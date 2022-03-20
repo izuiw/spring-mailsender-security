@@ -25,17 +25,21 @@ table {
 		<table border="1">
 			<tr>
 				<td>아이디 : </td>
-				<td><form:input path="id" placeholder="필수입력"/></td>
+				<td><form:input path="id" placeholder="필수입력"/>
+				<form:errors path="id"/></td>
 			</tr>
 
 			<tr>
 				<td>비밀번호 : </td>
-				<td><form:input path="pwd" type="password" placeholder="필수입력"/></td>
+				<td><form:input path="pwd" type="password" placeholder="필수입력"/>
+				<form:errors path="pwd"/></td>
 			</tr>
 
 			<tr>
 				<td>Email : </td>
-				<td><form:input path="email" placeholder="필수입력"/></td>
+				<td><form:input path="email" placeholder="필수입력"/>
+				<form:errors path="email"/></td>
+				
 			</tr>
 			
 

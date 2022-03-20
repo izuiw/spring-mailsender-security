@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("regService")
+@Service
 public class RegService {
 	
 	
@@ -26,8 +26,13 @@ public class RegService {
 		memberDAO.updateAuth(map);
 	}
 	
-	public void updateAuthStatus(String email) {
-		memberDAO.updateAuthStatus(email);
+
+	public void updateAuthStatus(String email, String authkey) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email",email);
+		map.put("auth", authkey);
+		//System.out.println("regService HashMap : " + map.toString());
+		memberDAO.updateAuthStatus(map);
 	}
 	
 	

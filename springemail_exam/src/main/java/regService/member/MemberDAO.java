@@ -9,7 +9,7 @@ public interface MemberDAO {
 	
 	public void updateAuth(HashMap<String, String> map);
 	
-	public void updateAuthStatus(String email);
+	public void updateAuthStatus(HashMap<String, String> map);
 
 	public String idCheck(String id);
 	

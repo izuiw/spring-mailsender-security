@@ -32,9 +32,9 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void updateAuthStatus(String email) {
+	public void updateAuthStatus(HashMap<String,String> map) {
 		// TODO Auto-generated method stub
-		sqlST.update("updateAuthStatus", email);
+		sqlST.update("updateAuthStatus", map);
 	}
 
 	@Override

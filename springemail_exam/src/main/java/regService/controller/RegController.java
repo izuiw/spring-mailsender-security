@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.activation.MailcapCommandMap;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +36,12 @@ public class RegController {
 	}
 	
 	@RequestMapping(value="/member/signup", method = RequestMethod.POST)
-	public String handleReg (@ModelAttribute("regMemberData") MemberVO memberVO) {
+	public String handleReg (@Valid @ModelAttribute("regMemberData") MemberVO memberVO, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "regForm";
+		}
+		
 		//db등록
 		System.out.println("가입컨트롤러 " + memberVO);
 		regService.signup(memberVO);
@@ -55,10 +62,11 @@ public class RegController {
 	}
 	
 	@RequestMapping(value="/member/signUpConfirm")
-	public String signupConfirm(String email, Model model) {	
-		
-		regService.updateAuthStatus(email);
-		System.out.println("email 인증 완료 " + email);
+	public String signupConfirm(String email, String authKey, Model model) {	
+		System.out.println("인증전\n"+email +", " + authKey);
+		regService.updateAuthStatus(email, authKey);
+		System.out.println("email 인증 완료 ");
+
 		model.addAttribute("email", email);
 		
 		return "signup/authnext";
