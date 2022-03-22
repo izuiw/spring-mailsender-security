@@ -22,7 +22,10 @@ public class RegService {
 		
 	}
 	
-	public void updateAuth(HashMap<String, String> map) {
+	public void updateAuth(String email, String auth) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("auth", auth);
 		memberDAO.updateAuth(map);
 	}
 	

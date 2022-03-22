@@ -38,7 +38,7 @@ public class LoginController {
 		if(memberVO != null) {
 			System.out.println("로그인 성공 : " + memberVO);
 			session.setAttribute("memberVO", memberVO);	
-			return "signup/loginnext";
+			return "main";
 		} else {
 			System.out.println("로그인 정보 없음 or 비밀번호 불일치 : " + memberVO);
 			model.addAttribute("msg", "해당 회원 정보가 없습니다.");

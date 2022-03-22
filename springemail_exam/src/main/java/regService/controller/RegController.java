@@ -1,9 +1,5 @@
 package regService.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.activation.MailcapCommandMap;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import regService.email.EmailSendService;
 import regService.member.MemberVO;
@@ -50,13 +43,10 @@ public class RegController {
 		//임의키 auth 생성 및 이메일 발송
 		String auth = mss.sendAuthMail(memberVO.getEmail());
 		memberVO.setAuth(auth);
+
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("email", memberVO.getEmail());
-		map.put("auth", memberVO.getAuth());
-		
-		//db업데이트
-		regService.updateAuth(map);
+		//db auth 업데이트
+		regService.updateAuth(memberVO.getEmail(), memberVO.getAuth());
 		
 		return "signup/regnext";
 	}
