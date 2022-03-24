@@ -3,6 +3,7 @@ package regService.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,8 @@ public class RegController {
 	
 	@Autowired
 	private EmailSendService mss;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	
 	@RequestMapping(value="/member/signup", method=RequestMethod.GET)
@@ -34,7 +37,12 @@ public class RegController {
 		if(bindingResult.hasErrors()) {
 			return "regForm";
 		}
+		System.out.println("??" + memberVO);
 		
+		//패스워드 인코딩
+		String encodePwd = passwordEncoder.encode(memberVO.getPwd());
+		System.out.println("인코딩 됐나?" + encodePwd);
+		memberVO.setPwd(encodePwd);
 		//db등록
 		System.out.println("가입컨트롤러 " + memberVO);
 		regService.signup(memberVO);
@@ -52,9 +60,9 @@ public class RegController {
 	}
 	
 	@RequestMapping(value="/member/signUpConfirm")
-	public String signupConfirm(String email, String authKey, Model model) {	
-		System.out.println("인증전\n"+email +", " + authKey);
-		regService.updateAuthStatus(email, authKey);
+	public String signupConfirm(String email, String auth, Model model) {	
+		System.out.println("인증전\n"+email +", " + auth);
+		regService.updateAuthStatus(email, auth);
 		System.out.println("email 인증 완료 ");
 
 		model.addAttribute("email", email);
