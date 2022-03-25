@@ -14,10 +14,13 @@ public class LoginService {
 	private MemberDAO memberDAO;
 	
 	
-	public MemberVO login (String id, String pwd) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("pwd", pwd);
-		return memberDAO.login(map);
+	public MemberVO login (String id) {
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("id", id);
+//		map.put("pwd", pwd);
+		
+		return memberDAO.login(id);
 	}
+	
+
 }

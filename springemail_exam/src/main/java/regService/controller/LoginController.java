@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,11 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	
+	
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String handleLogin(@ModelAttribute("loginMemberData") LoginCommand logincommand) {
 		return "loginForm";
@@ -33,9 +39,15 @@ public class LoginController {
 			return "loginForm";
 		}
 		
-		MemberVO memberVO = loginService.login(command.getId(), command.getPwd());
-
-		if(memberVO != null) {
+		MemberVO memberVO = loginService.login(command.getId());
+		
+		String password = command.getPwd();
+		String encodePassword = memberVO.getPwd();
+		
+		boolean pwdEncode= passwordEncoder.matches(password, encodePassword);
+		//System.out.println("로그인 컨트롤러  : " + pwdEncode);
+		
+		if(memberVO != null && pwdEncode) {
 			System.out.println("로그인 성공 : " + memberVO);
 			session.setAttribute("memberVO", memberVO);	
 			return "main";

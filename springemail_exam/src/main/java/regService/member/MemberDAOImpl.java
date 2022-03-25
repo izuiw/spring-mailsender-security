@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 
 public class MemberDAOImpl implements MemberDAO{
@@ -38,13 +37,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public MemberVO login(HashMap<String, String> map) {
+	public MemberVO login(String id) {
 		// TODO Auto-generated method stub
-		return sqlST.selectOne("login", map);
+		return sqlST.selectOne("login", id);
 	}
 
 	@Override
-	public String idCheck(String id) {
+	public MemberVO idCheck(String id) {
 		// TODO Auto-generated method stub
 		return sqlST.selectOne("idCheck", id);
 	}

@@ -10,11 +10,11 @@ public interface MemberDAO {
 	public void updateAuth(HashMap<String, String> map);
 	
 	public void updateAuthStatus(HashMap<String, String> map);
-
-	public String idCheck(String id);
+	
+	public MemberVO idCheck(String id);
 	
 	//로그인 관련
-	public MemberVO login(HashMap<String, String> map);
+	public MemberVO login(String id);
 	
 	
 	

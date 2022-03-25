@@ -41,7 +41,7 @@ public class RegController {
 		
 		//패스워드 인코딩
 		String encodePwd = passwordEncoder.encode(memberVO.getPwd());
-		System.out.println("인코딩 됐나?" + encodePwd);
+
 		memberVO.setPwd(encodePwd);
 		//db등록
 		System.out.println("가입컨트롤러 " + memberVO);
