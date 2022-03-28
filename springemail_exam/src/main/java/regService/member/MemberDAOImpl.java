@@ -43,7 +43,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public MemberVO idCheck(String id) {
+	public String idCheck(String id) {
 		// TODO Auto-generated method stub
 		return sqlST.selectOne("idCheck", id);
 	}

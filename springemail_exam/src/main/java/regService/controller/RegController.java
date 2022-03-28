@@ -32,13 +32,16 @@ public class RegController {
 	}
 	
 	@RequestMapping(value="/member/signup", method = RequestMethod.POST)
-	public String handleReg (@Valid @ModelAttribute("regMemberData") MemberVO memberVO, BindingResult bindingResult) {
+	public String handleReg (@Valid @ModelAttribute("regMemberData") MemberVO memberVO, BindingResult bindingResult, Model model) {
 		
 		if(bindingResult.hasErrors()) {
 			return "regForm";
 		}
-		System.out.println("??" + memberVO);
-		
+
+		if (regService.idCheck(memberVO.getId()) != null) {
+			model.addAttribute("msg", "아이디 중복!");
+			return "regForm";
+		}
 		//패스워드 인코딩
 		String encodePwd = passwordEncoder.encode(memberVO.getPwd());
 

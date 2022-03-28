@@ -11,7 +11,7 @@ public interface MemberDAO {
 	
 	public void updateAuthStatus(HashMap<String, String> map);
 	
-	public MemberVO idCheck(String id);
+	public String idCheck(String id);
 	
 	//로그인 관련
 	public MemberVO login(String id);

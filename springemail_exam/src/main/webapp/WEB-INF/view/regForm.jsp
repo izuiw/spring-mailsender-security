@@ -26,7 +26,7 @@ table {
 			<tr>
 				<td>아이디 : </td>
 				<td><form:input path="id" placeholder="필수입력"/>
-				<form:errors path="id"/></td>
+				<form:errors path="id"/><br>${msg}</td>
 			</tr>
 
 			<tr>

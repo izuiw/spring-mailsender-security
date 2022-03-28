@@ -14,7 +14,9 @@ public class RegService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	
+	public String idCheck(String id) {
+		return memberDAO.idCheck(id);
+	}
 	
 	public void signup(MemberVO memberVO) {
 		
