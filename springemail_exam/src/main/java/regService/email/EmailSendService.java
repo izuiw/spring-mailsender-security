@@ -86,5 +86,34 @@ public class EmailSendService {
 
 		return auth;
 	}
+	
+	
+	// 임시 비밀번호 메일 보내기
+	public String sendPwdMail(String email) {
+
+		// 난수
+		String auth = getKey(6);
+
+		// 인증메일 보내기
+
+		try {
+
+			MailUtils sendMail = new MailUtils(mailSender);
+			System.out.println(mailSender.getHost());
+			sendMail.setSubject("임시 비밀번호 발급");
+			sendMail.setText(new StringBuffer().append("<h1>[임시 비밀번호]</h1>").append("<p>임시 비밀번호 : </p>")
+						.append(auth).toString());
+			sendMail.setFrom("aswll.kr@gmail.com", "관리자");
+			sendMail.setTo(email);
+			sendMail.send();
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		return auth;
+	}
 
 }

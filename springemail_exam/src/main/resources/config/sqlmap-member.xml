@@ -31,6 +31,15 @@
 		select * from REGSERVICE where ID = #{id}
 	</select>
 	
+	<select id="findPwd" parameterType="HashMap" resultType="memberVO">
+		select * from REGSERVICE where ID = #{id} and EMAIL = #{email}
+	</select>
+	
+	<update id="updateTmpPwd" parameterType="HashMap">
+		update REGSERVICE set PWD = #{tmpPwd} where id = #{id} and EMAIL = #{email} 
+	</update>
+	
+	
 	
 
 </mapper>

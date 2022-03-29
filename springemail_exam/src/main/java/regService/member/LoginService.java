@@ -22,5 +22,20 @@ public class LoginService {
 		return memberDAO.login(id);
 	}
 	
+	public MemberVO findPwd (String id, String email) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("email", email);
+		return memberDAO.findPwd(map);
+	}
+	
+	public void updateTmpPwd(String encodePwd, String id,String email) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("tmpPwd", encodePwd);
+		map.put("id", id);
+		map.put("email", email);
+		memberDAO.updateTmpPwd(map);
+		
+	}
 
 }

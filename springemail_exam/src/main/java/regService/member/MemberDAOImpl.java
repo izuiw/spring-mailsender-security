@@ -48,6 +48,19 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlST.selectOne("idCheck", id);
 	}
 
+	@Override
+	public MemberVO findPwd(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlST.selectOne("findPwd", map);
+	}
+
+	@Override
+	public void updateTmpPwd(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		sqlST.update("updateTmpPwd", map);
+		
+	}
+
 
 
 

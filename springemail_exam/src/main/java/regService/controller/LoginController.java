@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import regService.email.EmailSendService;
+import regService.member.FindCommand;
 import regService.member.LoginCommand;
 import regService.member.LoginService;
 import regService.member.MemberVO;
@@ -21,6 +23,9 @@ public class LoginController {
 	
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	private EmailSendService mss;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -57,10 +62,35 @@ public class LoginController {
 			return "loginForm";
 		}
 		
+	}
+	
+	@RequestMapping(value="/member/findPwd", method=RequestMethod.GET)
+	public String findPwd(@ModelAttribute("findPwdData") FindCommand command) {
+		return "findPwd";
+	}
+	
+	@RequestMapping(value="/member/findPwd", method=RequestMethod.POST)
+	public String findPwd(@Valid @ModelAttribute("findPwdData") FindCommand command, BindingResult bindingResult, Model model) {
 		
+		if(bindingResult.hasErrors()) {
+			return "findPwd";
+		}
+		
+		MemberVO memberVO = loginService.findPwd(command.getId(), command.getEmail());
+		
+		if(memberVO != null ) {
+			String tmpPwd = mss.sendPwdMail(command.getEmail()); // 임시키 발송
+			String encodePwd = passwordEncoder.encode(tmpPwd); //임시키 암호화
+			loginService.updateTmpPwd(encodePwd, command.getId(),command.getEmail()); // db 업데이트
+			
+			return "signup/findPwdnext";
+		} else {
+			System.out.println("로그인 정보 없음 or 비밀번호 불일치 : " + memberVO);
+			model.addAttribute("msg", "해당 회원 정보가 없습니다.");
+			return "findPwd";
+		}
 		
 	}
- 	
 	
 
 }
